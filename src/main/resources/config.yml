@@ -7,7 +7,7 @@ tax-rate: 4.0
 tax-interval: 2
 
 # Minimum balance required before a player is taxed
-minimum-taxable-balance: 100.0
+minimum-taxable-balance: 700.0
 
 # Should players be notified when taxed?
 notify-players: true

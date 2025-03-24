@@ -14,6 +14,7 @@ public class TaxStorage {
     private final JavaPlugin plugin;
     private final Map<UUID, Double> playerTaxData = new ConcurrentHashMap<>();
     private double totalCollected = 0.0;
+    private double offlineCollected = 0.0; // Track offline collections
     private final File dataFile;
     private YamlConfiguration config;
 
@@ -44,6 +45,7 @@ public class TaxStorage {
         config = YamlConfiguration.loadConfiguration(dataFile);
         
         totalCollected = config.getDouble("total_collected", 0.0);
+        offlineCollected = config.getDouble("offline_collected", 0.0);
         
         if (config.contains("player_data")) {
             for (String key : config.getConfigurationSection("player_data").getKeys(false)) {
@@ -62,6 +64,7 @@ public class TaxStorage {
     
     public void saveData() {
         config.set("total_collected", totalCollected);
+        config.set("offline_collected", offlineCollected);
         
         // Save player data
         for (Map.Entry<UUID, Double> entry : playerTaxData.entrySet()) {
@@ -76,9 +79,13 @@ public class TaxStorage {
         }
     }
     
-    public void recordTax(UUID playerId, double amount) {
+    public void recordTax(UUID playerId, double amount, boolean isOffline) {
         playerTaxData.put(playerId, playerTaxData.getOrDefault(playerId, 0.0) + amount);
         totalCollected += amount;
+        
+        if (isOffline) {
+            offlineCollected += amount;
+        }
         
         // Save periodically to prevent data loss
         if (Math.random() < 0.1) { // 10% chance to save on each tax
@@ -88,6 +95,18 @@ public class TaxStorage {
     
     public double getTotalCollected() {
         return totalCollected;
+    }
+    
+    public double getOfflineCollected() {
+        return offlineCollected;
+    }
+    
+    public void withdrawOfflineCollected(double amount) {
+        if (amount > offlineCollected) {
+            amount = offlineCollected;
+        }
+        offlineCollected -= amount;
+        saveData();
     }
     
     public Map<UUID, Double> getPlayerTaxData() {

@@ -1,13 +1,14 @@
 name: TaxPlugin
-version: '1.0-SNAPSHOT'
+version: '1.1-SNAPSHOT'
 main: com.taxPlugin.TaxPlugin
 api-version: '1.19'
 depend: [Vault]
-description: A plugin that taxes players 4% of their balance every 2 hours, made with love my Jeverlyro (recht)
+softdepend: [LuckPerms]
+description: A plugin that taxes players 4% of their balance every 2 hours, with offline taxation support
 commands:
   tax:
     description: Tax plugin commands
-    usage: /<command> [info]
+    usage: /<command> [info|collect|reload|stats|offlinetax|collect-offline]
     permission: taxplugin.admin
 permissions:
   taxplugin.admin:
@@ -15,4 +16,4 @@ permissions:
     default: op
   taxplugin.exempt:
     description: Exempts players from taxation
-    default: false 
+    default: false
