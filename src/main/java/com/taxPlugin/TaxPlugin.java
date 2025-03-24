@@ -21,6 +21,7 @@ public class TaxPlugin extends JavaPlugin {
     private static Economy econ = null;
     private BukkitTask taxTask = null;
     
+    // Config values with defaults
     private double taxRate = 0.04;
     private long taxIntervalHours = 2;
     private double minimumTaxableBalance = 100.0;
@@ -29,11 +30,13 @@ public class TaxPlugin extends JavaPlugin {
     private String serverAccount = "server_bank";
     private boolean debug = false;
     
+    // Tax statistics
     private double totalTaxesCollected = 0.0;
     private Map<UUID, Double> playerTaxContributions = new HashMap<>();
 
     @Override
     public void onEnable() {
+        // Save default config if it doesn't exist
         saveDefaultConfig();
         
         // Load configuration

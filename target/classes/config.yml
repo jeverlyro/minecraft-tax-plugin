@@ -1,0 +1,20 @@
+# TaxPlugin Configuration
+
+# Tax rate as a percentage (4.0 = 4%)
+tax-rate: 4.0
+
+# Tax collection interval in hours
+tax-interval: 2
+
+# Minimum balance required before a player is taxed
+minimum-taxable-balance: 100.0
+
+# Should players be notified when taxed?
+notify-players: true
+
+# Should collected taxes go to a server bank account?
+use-server-account: false
+server-account: "server_bank"
+
+# Debug mode (more verbose logging)
+debug: false

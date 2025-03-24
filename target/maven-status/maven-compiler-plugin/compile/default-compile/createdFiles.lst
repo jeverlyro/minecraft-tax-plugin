@@ -1,1 +1,2 @@
 com\taxPlugin\TaxPlugin.class
+com\taxPlugin\storage\TaxStorage.class
