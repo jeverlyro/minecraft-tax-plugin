@@ -3,7 +3,7 @@ version: '1.0-SNAPSHOT'
 main: com.taxPlugin.TaxPlugin
 api-version: '1.19'
 depend: [Vault]
-description: A plugin that taxes players 4% of their balance every 2 hours
+description: A plugin that taxes players 4% of their balance every 2 hours, made with love my Jeverlyro (recht)
 commands:
   tax:
     description: Tax plugin commands
